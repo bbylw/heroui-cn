@@ -24,7 +24,7 @@ export const FEATURES = [
     icon: 'Accessibility',
     title: '默认可访问',
     desc: '基于 React Aria 构建，开箱即用符合 WCAG 的键盘、焦点与屏幕阅读器行为。内置焦点管理、键盘导航和屏幕阅读器支持。',
-    span: 'lg:col-span-2 lg:row-span-2',
+    span: 'lg:col-span-2',
     accent: true,
   },
   {

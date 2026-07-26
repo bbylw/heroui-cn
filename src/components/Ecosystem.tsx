@@ -55,7 +55,7 @@ export default function Ecosystem() {
             >
               <div>
                 <div className="mb-6 flex items-center justify-between">
-                  <span className="rounded-full border border-[var(--border)] px-3 py-1 text-[10px] font-700 uppercase tracking-widest text-[var(--muted-foreground)]">
+                  <span className="rounded-full border border-[var(--border)] px-3 py-1 text-[11px] font-700 uppercase tracking-widest text-[var(--muted-foreground)]">
                     {item.tag}
                   </span>
                   <ArrowUpRight

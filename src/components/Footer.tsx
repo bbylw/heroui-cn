@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import { Button } from '@heroui/react'
 import { FOOTER_LINKS } from '../lib/data'
 import { useReveal } from '../lib/hooks'
 
@@ -31,22 +32,22 @@ export default function Footer() {
               加入数千个使用 HeroUI 构建的生产环境应用。开源、免费、AI 原生。
             </p>
             <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-              <a
-                href="https://heroui.com/cn/docs/react/getting-started/quick-start"
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex h-12 items-center rounded-xl bg-[var(--accent)] px-7 text-base font-600 text-[var(--accent-foreground)] transition-transform hover:scale-[1.02]"
+              <Button
+                variant="primary"
+                size="lg"
+                className="h-12 px-7 text-base"
+                onPress={() => window.open('https://heroui.com/cn/docs/react/getting-started/quick-start', '_blank')}
               >
                 查看文档
-              </a>
-              <a
-                href="https://github.com/heroui-inc/heroui"
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex h-12 items-center rounded-xl border border-[var(--border)] bg-[var(--background)] px-7 text-base font-600 transition-colors hover:bg-[var(--muted)]"
+              </Button>
+              <Button
+                variant="secondary"
+                size="lg"
+                className="h-12 px-7 text-base"
+                onPress={() => window.open('https://github.com/heroui-inc/heroui', '_blank')}
               >
                 GitHub
-              </a>
+              </Button>
             </div>
           </div>
         </motion.div>

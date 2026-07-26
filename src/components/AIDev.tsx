@@ -22,7 +22,7 @@ export default function AIDev() {
             transition={{ duration: 0.6 }}
             className="mb-4 inline-block text-xs font-700 uppercase tracking-[0.2em] text-[var(--accent)]"
           >
-            05 — AI 开发
+            08 — AI 开发
           </motion.span>
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -77,7 +77,7 @@ export default function AIDev() {
                   {tool.tools.map((t) => (
                     <span
                       key={t}
-                      className="rounded-md border border-[var(--border)] bg-[var(--background)] px-2 py-1 font-mono text-[10px] text-[var(--muted-foreground)]"
+                      className="rounded-md border border-[var(--border)] bg-[var(--background)] px-2 py-1 font-mono text-[11px] text-[var(--muted-foreground)]"
                     >
                       {t}
                     </span>

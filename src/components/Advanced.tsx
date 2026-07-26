@@ -47,7 +47,7 @@ function TopicCard({
             {topic.desc}
           </p>
         </div>
-        <span className="shrink-0 rounded-md border border-[var(--border)] bg-[var(--muted)] px-2 py-0.5 font-mono text-[10px] uppercase tracking-wider text-[var(--accent)]">
+        <span className="shrink-0 rounded-md border border-[var(--border)] bg-[var(--muted)] px-2 py-0.5 font-mono text-[11px] uppercase tracking-wider text-[var(--accent)]">
           {topic.badge}
         </span>
       </div>
@@ -194,7 +194,7 @@ export default function Advanced() {
                 GPU 加速属性演示
               </h4>
             </div>
-            <span className="font-mono text-[10px] text-[var(--muted-foreground)]">
+            <span className="font-mono text-[11px] text-[var(--muted-foreground)]">
               animate: transform / opacity
             </span>
           </div>
@@ -212,7 +212,7 @@ export default function Advanced() {
                 <span className="font-display text-sm font-700">
                   Hover me
                 </span>
-                <code className="mt-1 font-mono text-[10px] text-[var(--accent)]">
+                <code className="mt-1 font-mono text-[11px] text-[var(--accent)]">
                   {demo.label}
                 </code>
               </div>
@@ -244,7 +244,7 @@ export default function Advanced() {
                 主题切换器（演示）
               </h4>
               <p className="mt-1 text-xs text-[var(--muted-foreground)]">
-                模拟 useTheme 钩子的三态选择：Light · Dark · System
+                点击下方按钮预览不同主题下的色彩方案
               </p>
             </div>
             <div className="flex items-center gap-2">
@@ -274,34 +274,52 @@ export default function Advanced() {
               </Button>
             </div>
           </div>
-          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-            {[
-              { label: 'bg-background', var: '--background' },
-              { label: 'bg-surface', var: '--surface' },
-              { label: 'text-foreground', var: '--foreground' },
-              { label: 'accent', var: '--accent' },
-              { label: 'success', var: '--success' },
-              { label: 'danger', var: '--danger' },
-            ].map((sw) => (
+
+          {/* 主题预览卡片 — 根据选择切换配色 */}
+          <div
+            className="overflow-hidden rounded-xl border transition-colors duration-500"
+            style={{
+              background: theme === 'light' ? '#ffffff' : theme === 'dark' ? '#0a0908' : '#1a1a2e',
+              borderColor: theme === 'light' ? '#e5e5e5' : theme === 'dark' ? '#26231e' : '#2d2d44',
+            }}
+          >
+            <div className="p-5">
               <div
-                key={sw.label}
-                className="overflow-hidden rounded-xl border border-[var(--border)]"
+                className="mb-3 text-sm font-600 transition-colors duration-500"
+                style={{ color: theme === 'light' ? '#171717' : '#f5f1e8' }}
               >
-                <div
-                  className="h-16 w-full"
-                  style={{ background: `var(${sw.var}, var(--accent))` }}
-                />
-                <div className="bg-[var(--surface)] p-2">
-                  <code className="font-mono text-[10px] text-[var(--muted-foreground)]">
-                    {sw.label}
-                  </code>
-                </div>
+                预览：{theme === 'light' ? 'Light' : theme === 'dark' ? 'Dark' : 'System (跟随系统)'} 主题
               </div>
-            ))}
+              <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+                {[
+                  { label: 'background', light: '#ffffff', dark: '#0a0908', system: '#1a1a2e' },
+                  { label: 'surface', light: '#f5f5f5', dark: '#15130f', system: '#22223a' },
+                  { label: 'foreground', light: '#171717', dark: '#f5f1e8', system: '#e8e8f0' },
+                  { label: 'accent', light: '#d97757', dark: '#d97757', system: '#7c6cf0' },
+                  { label: 'muted', light: '#e5e5e5', dark: '#26231e', system: '#2d2d44' },
+                  { label: 'border', light: '#d4d4d4', dark: '#3a362f', system: '#3d3d5c' },
+                ].map((sw) => (
+                  <div key={sw.label} className="overflow-hidden rounded-lg border" style={{ borderColor: theme === 'light' ? '#e5e5e5' : theme === 'dark' ? '#26231e' : '#2d2d44' }}>
+                    <div
+                      className="h-12 w-full transition-colors duration-500"
+                      style={{ background: theme === 'light' ? sw.light : theme === 'dark' ? sw.dark : sw.system }}
+                    />
+                    <div className="p-1.5" style={{ background: theme === 'light' ? '#fafafa' : theme === 'dark' ? '#15130f' : '#22223a' }}>
+                      <code
+                        className="font-mono text-[11px] transition-colors duration-500"
+                        style={{ color: theme === 'light' ? '#737373' : '#9a9282' }}
+                      >
+                        {sw.label}
+                      </code>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
-          <p className="mt-3 font-mono text-[10px] text-[var(--muted-foreground)]">
+          <p className="mt-3 font-mono text-[11px] text-[var(--muted-foreground)]">
             当前选择: <span className="text-[var(--accent)]">{theme}</span>{' '}
-            · 这些色块读取的是当前页面 CSS 变量
+            · HeroUI 通过 CSS 变量实现主题切换，无需重新渲染组件树
           </p>
         </motion.div>
 

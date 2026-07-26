@@ -3,7 +3,10 @@ import { MARQUEE_ITEMS } from '../lib/data'
 export default function Marquee() {
   const items = [...MARQUEE_ITEMS, ...MARQUEE_ITEMS]
   return (
-    <section className="relative border-y border-[var(--border)] bg-[var(--surface)] py-6">
+    <section
+      aria-hidden="true"
+      className="relative border-y border-[var(--border)] bg-[var(--surface)] py-6"
+    >
       <div className="flex overflow-hidden">
         <div className="animate-marquee flex shrink-0 items-center gap-8 pr-8">
           {items.map((item, i) => (

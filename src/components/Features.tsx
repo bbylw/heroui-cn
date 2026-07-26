@@ -26,10 +26,10 @@ export default function Features() {
     <section
       id="features"
       ref={ref}
-      className="relative mx-auto max-w-7xl px-4 py-32 sm:px-6 lg:px-8"
+      className="relative mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8"
     >
       {/* 章节标题 */}
-      <div className="mb-16 flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
+      <div className="mb-12 flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
         <div>
           <motion.span
             initial={{ opacity: 0 }}
@@ -62,7 +62,7 @@ export default function Features() {
       </div>
 
       {/* Bento 网格 */}
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:auto-rows-[minmax(180px,auto)]">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:auto-rows-[minmax(150px,auto)]">
         {FEATURES.map((feature, i) => {
           const Icon = ICONS[feature.icon as keyof typeof ICONS]
           return (

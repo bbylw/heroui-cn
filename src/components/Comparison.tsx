@@ -20,7 +20,7 @@ export default function Comparison() {
             transition={{ duration: 0.6 }}
             className="mb-4 inline-block text-xs font-700 uppercase tracking-[0.2em] text-[var(--accent)]"
           >
-            06 — 对比
+            09 — 对比
           </motion.span>
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -54,7 +54,7 @@ export default function Comparison() {
               }`}
             >
               {lib.highlight && (
-                <span className="absolute right-4 top-4 rounded-full bg-[var(--accent)] px-2.5 py-1 text-[10px] font-700 uppercase tracking-wider text-[var(--accent-foreground)]">
+                <span className="absolute right-4 top-4 rounded-full bg-[var(--accent)] px-2.5 py-1 text-[11px] font-700 uppercase tracking-wider text-[var(--accent-foreground)]">
                   推荐
                 </span>
               )}

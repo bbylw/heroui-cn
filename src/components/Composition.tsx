@@ -191,7 +191,7 @@ export default function Composition() {
                   <Tabs.Tab
                     key={p.component}
                     id={p.component}
-                    className="rounded-lg px-4 py-2 text-sm font-600 data-[selected]:bg-[var(--accent)] data-[selected]:text-[var(--accent-foreground)]"
+                    className="rounded-lg px-4 py-2 text-sm font-600 text-[var(--ink-200,#c4bda9)] transition-colors hover:text-[var(--foreground)] data-[selected]:bg-[var(--accent)] data-[selected]:text-[var(--accent-foreground)]"
                   >
                     {p.component}
                   </Tabs.Tab>
@@ -210,7 +210,7 @@ export default function Composition() {
                         {p.variants.map((v) => (
                           <span
                             key={v}
-                            className="rounded-md border border-[var(--border)] px-2 py-0.5 font-mono text-[10px] text-[var(--muted-foreground)]"
+                            className="rounded-md border border-[var(--border)] px-2 py-0.5 font-mono text-[11px] text-[var(--muted-foreground)]"
                           >
                             {v}
                           </span>
@@ -390,7 +390,7 @@ export default function Composition() {
                   {p.variants.map((v) => (
                     <span
                       key={v}
-                      className="rounded border border-[var(--border)] px-1.5 py-0.5 font-mono text-[9px] text-[var(--muted-foreground)]"
+                      className="rounded border border-[var(--border)] px-1.5 py-0.5 font-mono text-[11px] text-[var(--muted-foreground)]"
                     >
                       {v}
                     </span>

@@ -81,7 +81,7 @@ export default function QuickStart() {
             transition={{ duration: 0.6 }}
             className="mb-4 inline-block text-xs font-700 uppercase tracking-[0.2em] text-[var(--accent)]"
           >
-            04 — 快速开始
+            07 — 快速开始
           </motion.span>
           <motion.h2
             initial={{ opacity: 0, y: 20 }}

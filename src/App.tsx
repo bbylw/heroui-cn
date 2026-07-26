@@ -15,8 +15,14 @@ import Footer from './components/Footer'
 export default function App() {
   return (
     <div className="relative min-h-screen overflow-x-hidden">
+      <a
+        href="#main-content"
+        className="sr-only z-[100] rounded-lg bg-[var(--accent)] px-4 py-2 text-sm font-600 text-[var(--accent-foreground)] focus:not-sr-only focus:fixed focus:left-4 focus:top-4"
+      >
+        跳到主要内容
+      </a>
       <Navbar />
-      <main>
+      <main id="main-content">
         <Hero />
         <Marquee />
         <Features />

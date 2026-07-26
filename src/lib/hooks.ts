@@ -26,15 +26,19 @@ export function useReveal<T extends HTMLElement = HTMLDivElement>(
   return { ref, visible }
 }
 
-/** 滚动位置 hook */
-export function useScrollY() {
-  const [y, setY] = useState(0)
+/** 滚动阈值 hook — 仅在跨越阈值时触发重渲染 */
+export function useScrolled(threshold = 24) {
+  const [scrolled, setScrolled] = useState(false)
   useEffect(() => {
-    const onScroll = () => setY(window.scrollY)
+    const onScroll = () => {
+      const past = window.scrollY > threshold
+      setScrolled((prev) => (prev !== past ? past : prev))
+    }
+    onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
-  }, [])
-  return y
+  }, [threshold])
+  return scrolled
 }
 
 /** 鼠标位置 hook (用于聚光灯效果) */

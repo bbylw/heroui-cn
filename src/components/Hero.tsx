@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion'
 import { ArrowRight, Sparkles } from 'lucide-react'
-import { Button } from '@heroui/react'
 import { HERO_STATS } from '../lib/data'
 
 export default function Hero() {
@@ -78,30 +77,22 @@ export default function Hero() {
               transition={{ duration: 0.6, delay: 0.5 }}
               className="mt-10 flex flex-wrap items-center gap-4"
             >
-              <Button
-                variant="primary"
-                size="lg"
-                className="group h-12 px-7 text-base"
-                onPress={() =>
-                  (window.location.href = '#quick-start')
-                }
+              <a
+                href="#quick-start"
+                className="group inline-flex h-12 items-center rounded-xl bg-[var(--accent)] px-7 text-base font-600 text-[var(--accent-foreground)] transition-transform hover:scale-[1.02]"
               >
                 快速开始
                 <ArrowRight
                   size={18}
                   className="ml-1 transition-transform group-hover:translate-x-1"
                 />
-              </Button>
-              <Button
-                variant="secondary"
-                size="lg"
-                className="h-12 px-7 text-base"
-                onPress={() =>
-                  (window.location.href = '#components')
-                }
+              </a>
+              <a
+                href="#components"
+                className="inline-flex h-12 items-center rounded-xl border border-[var(--border)] bg-[var(--surface)] px-7 text-base font-600 text-[var(--foreground)] transition-colors hover:bg-[var(--muted)]"
               >
                 浏览组件
-              </Button>
+              </a>
             </motion.div>
 
             {/* 安装命令 */}

@@ -264,7 +264,7 @@ export default function ComponentsShowcase() {
                   >
                     {v.label}
                   </Button>
-                  <code className="font-mono text-[9px] text-[var(--muted-foreground)]">
+                  <code className="font-mono text-[11px] text-[var(--muted-foreground)]">
                     {v.name}
                   </code>
                 </div>

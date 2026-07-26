@@ -64,7 +64,7 @@ export default function Theming() {
                     {color.en}
                   </span>
                 </div>
-                <code className="rounded-md bg-[var(--muted)] px-2 py-1 font-mono text-[10px] text-[var(--accent)]">
+                <code className="rounded-md bg-[var(--muted)] px-2 py-1 font-mono text-[11px] text-[var(--accent)]">
                   {color.var}
                 </code>
               </div>
@@ -84,7 +84,7 @@ export default function Theming() {
                       style={{ background: `var(${sw.var}, var(--accent))` }}
                     />
                     <div className="mt-1.5 text-center">
-                      <div className="text-[10px] font-500 text-[var(--foreground)]">
+                      <div className="text-[11px] font-500 text-[var(--foreground)]">
                         {sw.label}
                       </div>
                     </div>
@@ -117,10 +117,10 @@ export default function Theming() {
               />
               <div className="bg-[var(--surface)] p-3">
                 <div className="text-xs font-600">{layer.label}</div>
-                <div className="mt-0.5 text-[10px] text-[var(--muted-foreground)]">
+                <div className="mt-0.5 text-[11px] text-[var(--muted-foreground)]">
                   {layer.desc}
                 </div>
-                <code className="mt-1 block font-mono text-[9px] text-[var(--accent)]">
+                <code className="mt-1 block font-mono text-[11px] text-[var(--accent)]">
                   {layer.var}
                 </code>
               </div>

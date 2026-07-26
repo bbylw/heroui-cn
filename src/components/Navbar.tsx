@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
 
@@ -15,18 +15,28 @@ function GithubIcon({ size = 16 }: { size?: number }) {
     </svg>
   )
 }
-import { Button } from '@heroui/react'
 import { NAV_LINKS } from '../lib/data'
-import { useScrollY } from '../lib/hooks'
+import { useScrolled } from '../lib/hooks'
 
 export default function Navbar() {
-  const y = useScrollY()
+  const scrolled = useScrolled(24)
   const [open, setOpen] = useState(false)
+  const headerRef = useRef<HTMLElement>(null)
 
-  const scrolled = y > 24
+  useEffect(() => {
+    if (!open) return
+    const onClickOutside = (e: MouseEvent) => {
+      if (headerRef.current && !headerRef.current.contains(e.target as Node)) {
+        setOpen(false)
+      }
+    }
+    document.addEventListener('pointerdown', onClickOutside)
+    return () => document.removeEventListener('pointerdown', onClickOutside)
+  }, [open])
 
   return (
     <motion.header
+      ref={headerRef}
       initial={{ y: -80, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
@@ -45,7 +55,7 @@ export default function Navbar() {
           <span className="font-display text-xl font-700 tracking-tight">
             HeroUI
           </span>
-          <span className="hidden rounded-full border border-[var(--border)] px-2 py-0.5 text-[10px] font-500 uppercase tracking-widest text-[var(--muted-foreground)] sm:inline">
+          <span className="hidden rounded-full border border-[var(--border)] px-2 py-0.5 text-[11px] font-500 uppercase tracking-widest text-[var(--muted-foreground)] sm:inline">
             v3
           </span>
         </a>
@@ -75,14 +85,12 @@ export default function Navbar() {
             <GithubIcon size={16} />
           </a>
 
-          <Button
-            variant="primary"
-            size="sm"
-            className="hidden sm:inline-flex"
-            onPress={() => (window.location.href = '#quick-start')}
+          <a
+            href="#quick-start"
+            className="hidden h-9 items-center rounded-lg bg-[var(--accent)] px-4 text-sm font-600 text-[var(--accent-foreground)] transition-transform hover:scale-[1.02] sm:inline-flex"
           >
             开始使用
-          </Button>
+          </a>
 
           <button
             onClick={() => setOpen((o) => !o)}
@@ -114,16 +122,13 @@ export default function Navbar() {
                   {link.label}
                 </a>
               ))}
-              <Button
-                variant="primary"
-                className="mt-2 w-full"
-                onPress={() => {
-                  setOpen(false)
-                  window.location.href = '#quick-start'
-                }}
+              <a
+                href="#quick-start"
+                onClick={() => setOpen(false)}
+                className="mt-2 inline-flex h-10 w-full items-center justify-center rounded-lg bg-[var(--accent)] text-sm font-600 text-[var(--accent-foreground)] transition-transform hover:scale-[1.02]"
               >
                 开始使用
-              </Button>
+              </a>
             </div>
           </motion.div>
         )}
