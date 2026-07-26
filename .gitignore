@@ -1,6 +1,47 @@
+# Dependencies
 node_modules/
-.next/
-out/
+.pnpm-store/
+
+# Build output
+dist/
+dist-ssr/
+*.local
+
+# Vite
+.vite/
+
+# Editor
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Env
+.env
+.env.*
+!.env.example
+
+# Temp
+.tmp-*
+
+# TypeScript build info
 *.tsbuildinfo
-next-env.d.ts
-.env*.local
+
+# Compiled config
+vite.config.d.ts
+vite.config.js
