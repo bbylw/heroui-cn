@@ -56,7 +56,7 @@ export default function Navbar() {
             HeroUI
           </span>
           <span className="hidden rounded-full border border-[var(--border)] px-2 py-0.5 text-[11px] font-500 uppercase tracking-widest text-[var(--muted-foreground)] sm:inline">
-            v3
+            v3.2
           </span>
         </a>
 

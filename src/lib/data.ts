@@ -13,9 +13,9 @@ export const NAV_LINKS = [
 ] as const
 
 export const HERO_STATS = [
-  { value: '50+', label: '组件数量' },
+  { value: '70+', label: '组件数量' },
   { value: 'WCAG', label: '无障碍标准' },
-  { value: 'v3', label: '当前版本' },
+  { value: 'v3.2.8', label: '当前版本' },
   { value: 'MIT', label: '开源协议' },
 ] as const
 
@@ -51,7 +51,7 @@ export const FEATURES = [
   {
     icon: 'Bot',
     title: 'AI 原生',
-    desc: '提供 MCP 服务器、llms.txt 以及 Agent 技能，让 AI 助手理解你的组件与主题。',
+    desc: '提供 MCP 服务器、随包发布的版本匹配文档与 llms.txt、Agent 技能以及 DESIGN.md，让 AI 助手理解你的组件、主题与视觉语言。',
     span: 'lg:col-span-2',
     accent: false,
   },
@@ -261,6 +261,32 @@ export const COMPOSITION_PATTERNS = [
     variants: ['auto', 'top', 'center', 'bottom'],
   },
   {
+    component: 'Sheet',
+    title: '抽屉浮层',
+    desc: 'v3.2.7 新增的滑动浮层：支持四个方向、吸附位置与嵌套，可拖拽手柄关闭。',
+    structure: `<Sheet placement="bottom">
+  <Sheet.Trigger>
+    <Button>打开</Button>
+  </Sheet.Trigger>
+  <Sheet.Backdrop>
+    <Sheet.Content>
+      <Sheet.Dialog>
+        <Sheet.Handle />
+        <Sheet.CloseTrigger />
+        <Sheet.Header>
+          <Sheet.Heading />
+        </Sheet.Header>
+        <Sheet.Body />
+        <Sheet.Footer>
+          <Sheet.Close />
+        </Sheet.Footer>
+      </Sheet.Dialog>
+    </Sheet.Content>
+  </Sheet.Backdrop>
+</Sheet>`,
+    variants: ['bottom', 'top', 'left', 'right'],
+  },
+  {
     component: 'Dropdown',
     title: '下拉菜单',
     desc: '展示一组可供用户选择的操作或选项，支持单选/多选。',
@@ -289,35 +315,35 @@ export const COMPOSITION_PATTERNS = [
 export const COMPONENT_CATEGORIES = [
   {
     title: '按钮与交互',
-    items: ['Button', 'ButtonGroup', 'ToggleButton', 'ToggleButtonGroup', 'CloseButton'],
+    items: ['Button', 'ButtonGroup', 'ToggleButton', 'ToggleButtonGroup', 'CloseButton', 'Link'],
   },
   {
     title: '表单控件',
-    items: ['Input', 'TextField', 'Checkbox', 'Switch', 'Slider', 'NumberField', 'InputOTP'],
+    items: ['Input', 'TextField', 'TextArea', 'Checkbox', 'RadioGroup', 'Switch', 'Slider', 'NumberField', 'InputOTP', 'Fieldset'],
   },
   {
     title: '数据展示',
-    items: ['Table', 'Badge', 'Chip', 'Skeleton', 'ProgressBar', 'ProgressCircle', 'Meter'],
+    items: ['Table', 'Badge', 'Chip', 'Skeleton', 'ProgressBar', 'ProgressCircle', 'Meter', 'Avatar', 'AvatarGroup', 'Kbd'],
   },
   {
     title: '反馈与浮层',
-    items: ['Alert', 'Spinner', 'Dropdown', 'Modal', 'Tooltip', 'Toast'],
+    items: ['Alert', 'AlertDialog', 'Spinner', 'Modal', 'Drawer', 'Sheet', 'Toast', 'Tooltip', 'Popover'],
   },
   {
     title: '布局与导航',
-    items: ['Card', 'Accordion', 'Tabs', 'Drawer', 'Popover', 'Toolbar'],
+    items: ['Card', 'Surface', 'Separator', 'Accordion', 'Disclosure', 'Tabs', 'Breadcrumbs', 'Pagination', 'Toolbar'],
   },
   {
     title: '日期与时间',
-    items: ['Calendar', 'DatePicker', 'DateField', 'DateRangePicker', 'TimeField'],
+    items: ['Calendar', 'RangeCalendar', 'DatePicker', 'DateField', 'DateRangePicker', 'TimeField'],
   },
   {
     title: '颜色',
-    items: ['ColorPicker', 'ColorArea', 'ColorSlider', 'ColorSwatch', 'ColorSwatchPicker'],
+    items: ['ColorPicker', 'ColorField', 'ColorArea', 'ColorSlider', 'ColorSwatch', 'ColorSwatchPicker'],
   },
   {
     title: '集合',
-    items: ['ListBox', 'TagGroup', 'Menu', 'ComboBox', 'Autocomplete'],
+    items: ['ListBox', 'Dropdown', 'TagGroup', 'ComboBox', 'Autocomplete', 'Select'],
   },
 ] as const
 
@@ -336,7 +362,7 @@ export const BUTTON_VARIANTS = [
 export const FAQ_ITEMS = [
   {
     q: 'HeroUI 免费吗？',
-    a: '是的，基于 Apache License 2.0 完全免费且开源。可用于个人和商业项目。',
+    a: '是的，基于 MIT License 完全免费且开源。可用于个人和商业项目。',
   },
   {
     q: '可以用于生产环境吗？',
@@ -365,7 +391,7 @@ export const INSTALL_STEPS = [
   {
     step: '01',
     title: '安装依赖',
-    desc: '使用你偏好的包管理器安装 HeroUI 及其样式包。支持 npm、pnpm、yarn、bun。',
+    desc: '使用你偏好的包管理器安装 HeroUI 及其样式包。支持 npm、pnpm、yarn、bun；自 v3.2.3 起 React Aria 作为 peer 依赖，由包管理器统一解析。',
     code: 'pnpm add @heroui/styles @heroui/react',
     lang: 'bash',
   },
@@ -392,21 +418,28 @@ export const AI_TOOLS = [
     title: 'MCP 服务器',
     name: '@heroui/react-mcp',
     desc: '能理解你主题的组件 —— 可在 Cursor、Claude Code、Windsurf 或任何兼容 MCP 的编辑器中安装该服务器。让 AI 助手直接访问 HeroUI v3 组件文档。',
-    tools: ['list_components', 'get_component_docs', 'get_component_source_code', 'get_theme_variables'],
+    tools: ['list_components', 'get_component_docs', 'get_component_source_code', 'get_docs', 'get_theme_variables'],
   },
   {
     icon: 'FileText',
-    title: 'llms.txt',
-    name: 'heroui.com/llms.txt',
-    desc: '面向 LLM 的、关于每个组件的结构化上下文，让 AI 助手准确理解 HeroUI 的 API 与用法。',
-    tools: ['结构化文档', '组件上下文', 'API 参考'],
+    title: '包内文档',
+    name: 'node_modules/@heroui/react/docs',
+    desc: '自 v3.2.8 起，与安装版本严格匹配的 Markdown 文档与 llms.txt 随包发布，AI 助手无需联网即可读到当前版本的 API、示例与指南。',
+    tools: ['版本匹配', 'llms.txt', '离线可读'],
   },
   {
     icon: 'Sparkles',
     title: 'Agent 技能',
-    name: 'npx heroui-cli agents-md',
-    desc: '执行该命令为 Cursor、Claude Code 等安装 Agent 技能，让 AI 直接生成符合 HeroUI 规范的代码。',
-    tools: ['Cursor', 'Claude Code', 'Windsurf', 'GitHub Copilot'],
+    name: 'npx skills add heroui-inc/heroui',
+    desc: '为 Claude Code、Cursor、OpenCode 等安装 heroui-react 与 heroui-theming 技能，让 AI 直接生成符合 HeroUI 规范与主题体系的代码。',
+    tools: ['heroui-react', 'heroui-theming', 'Cursor', 'Claude Code'],
+  },
+  {
+    icon: 'BookOpen',
+    title: 'DESIGN.md',
+    name: 'npx heroui-cli@latest design-md --react',
+    desc: '下载 HeroUI 的默认设计语言文件，让 AI 生成的界面遵循语义化颜色、4px 间距节奏与组件约定，而不是硬编码颜色。',
+    tools: ['默认主题', '语义令牌', '设计原则'],
   },
 ] as const
 
@@ -453,6 +486,10 @@ export const MARQUEE_ITEMS = [
   'Framer Motion',
   'MCP 服务器',
   'llms.txt',
+  '包内文档',
+  'RTL 支持',
+  'Sheet 浮层',
+  'DESIGN.md',
   'CSS 变量',
   'BEM 方法论',
   'OKLCH 色彩',
@@ -522,7 +559,7 @@ export const STYLING_TECHNIQUES = [
   {
     title: 'tailwind-variants 包装',
     badge: '进阶',
-    desc: '使用 tailwind-variants 扩展 HeroUI 自带的变体函数，封装出自定义的可复用组件。',
+    desc: '使用 tailwind-variants 扩展 HeroUI 自带的变体函数，封装出自定义的可复用组件。v3.2.8 起 tailwind-variants 升级至 4.0.2：为 tv() 传入 twMergeConfig 时，需从 tailwind-variants/config 导入 tv。',
     code: `import { Button as HeroButton, type ButtonProps } from '@heroui/react';
 import { buttonVariants, tv, type VariantProps } from '@heroui/styles';
 

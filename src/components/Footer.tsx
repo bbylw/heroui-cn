@@ -99,7 +99,7 @@ export default function Footer() {
         {/* 底部栏 */}
         <div className="mt-16 flex flex-col items-center justify-between gap-4 border-t border-[var(--border)] pt-8 sm:flex-row">
           <p className="text-xs text-[var(--muted-foreground)]">
-            © 2026 HeroUI. 基于 Apache License 2.0 协议开源。
+            © 2026 HeroUI. 基于 MIT License 协议开源。
           </p>
           <p className="font-mono text-xs text-[var(--muted-foreground)]">
             Built with HeroUI · React 19 · Tailwind v4 · Vite

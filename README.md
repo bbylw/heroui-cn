@@ -24,7 +24,7 @@ HeroUI（前身为 NextUI）是一套生产就绪的 React 组件库，它将 [R
 - **Tailwind CSS v4** —— 现代引擎，无 CSS-in-JS 运行时，输出更小、构建更快
 - **复合组件** —— 可组合的 API（`Card.Header`、`Card.Content`），取代层层嵌套的 props
 - **零样板代码** —— 无需 Provider 包裹层（与 Chakra、MUI 不同）
-- **AI 原生** —— 提供 MCP 服务器、`llms.txt` 以及 Agent 技能，让 AI 助手理解你的组件
+- **AI 原生** —— 提供 MCP 服务器、随包发布的版本匹配文档与 `llms.txt`、Agent 技能以及 `DESIGN.md`，让 AI 助手理解你的组件与设计语言
 - **久经考验** —— 前身为 NextUI，已获数千个生产环境应用信赖
 
 ## 包含的包
@@ -60,8 +60,10 @@ HeroUI 专为 AI 辅助的开发工作流而打造。
 | 工具 | 作用 |
 |---|---|
 | **MCP 服务器**（`@heroui/react-mcp`） | 能理解你主题的组件 —— 可在 Cursor、Claude Code、Windsurf 或任何兼容 MCP 的编辑器中安装该服务器 |
+| **包内文档** | 自 v3.2.8 起，与安装版本匹配的 Markdown 文档与 `llms.txt` 随包发布在 `node_modules/@heroui/react/docs` |
 | **llms.txt** | 托管于 [heroui.com/llms.txt](https://heroui.com/llms.txt) —— 面向 LLM 的、关于每个组件的结构化上下文 |
-| **Agent 技能** | 执行 `npx heroui-cli agents-md` 为 Cursor、Claude Code 等安装技能 |
+| **Agent 技能** | 执行 `npx skills add heroui-inc/heroui` 安装 `heroui-react` 与 `heroui-theming` 技能 |
+| **DESIGN.md** | 执行 `npx heroui-cli@latest design-md --react` 下载默认设计语言，让 AI 生成的界面遵循语义化令牌 |
 
 支持 **Cursor**、**Claude Code**、**Windsurf**、**GitHub Copilot**，以及任何兼容 MCP 或 `llms.txt` 的工具。
 

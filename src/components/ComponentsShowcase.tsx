@@ -45,7 +45,7 @@ export default function ComponentsShowcase() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="font-display text-4xl font-700 leading-tight tracking-tight sm:text-5xl lg:text-6xl"
           >
-            50+ 组件，
+            70+ 组件，
             <span className="text-gradient-amber italic">开箱即用</span>
           </motion.h2>
         </div>

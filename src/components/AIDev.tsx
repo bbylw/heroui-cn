@@ -1,9 +1,9 @@
 import { motion } from 'framer-motion'
-import { Server, FileText, Sparkles, Terminal } from 'lucide-react'
+import { Server, FileText, Sparkles, BookOpen, Terminal } from 'lucide-react'
 import { AI_TOOLS } from '../lib/data'
 import { useReveal } from '../lib/hooks'
 
-const ICONS = { Server, FileText, Sparkles } as const
+const ICONS = { Server, FileText, Sparkles, BookOpen } as const
 
 export default function AIDev() {
   const { ref, visible } = useReveal()
@@ -45,7 +45,7 @@ export default function AIDev() {
         </motion.p>
       </div>
 
-      <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {AI_TOOLS.map((tool, i) => {
           const Icon = ICONS[tool.icon as keyof typeof ICONS]
           return (
