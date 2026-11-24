@@ -1,6 +1,8 @@
-import { useState, useEffect, useRef } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { useRef } from 'react'
+import { motion } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
+import { NAV_LINKS } from '../lib/data'
+import { useScrolled } from '../lib/hooks'
 
 function GithubIcon({ size = 16 }: { size?: number }) {
   return (
@@ -15,24 +17,15 @@ function GithubIcon({ size = 16 }: { size?: number }) {
     </svg>
   )
 }
-import { NAV_LINKS } from '../lib/data'
-import { useScrolled } from '../lib/hooks'
+
+/** 关闭原生 popover 菜单（顶部图层，Esc 与点击外部由浏览器处理） */
+function closeMenu() {
+  document.getElementById('site-menu')?.hidePopover()
+}
 
 export default function Navbar() {
   const scrolled = useScrolled(24)
-  const [open, setOpen] = useState(false)
   const headerRef = useRef<HTMLElement>(null)
-
-  useEffect(() => {
-    if (!open) return
-    const onClickOutside = (e: MouseEvent) => {
-      if (headerRef.current && !headerRef.current.contains(e.target as Node)) {
-        setOpen(false)
-      }
-    }
-    document.addEventListener('pointerdown', onClickOutside)
-    return () => document.removeEventListener('pointerdown', onClickOutside)
-  }, [open])
 
   return (
     <motion.header
@@ -92,31 +85,30 @@ export default function Navbar() {
             开始使用
           </a>
 
+          {/* 原生 popover 触发器：展开状态由浏览器同步到无障碍树 */}
           <button
-            onClick={() => setOpen((o) => !o)}
-            className="flex h-9 w-9 items-center justify-center rounded-lg border border-[var(--border)] lg:hidden"
+            type="button"
+            popoverTarget="site-menu"
+            popoverTargetAction="toggle"
+            className="nav-menu-toggle flex h-9 w-9 items-center justify-center rounded-lg border border-[var(--border)] lg:hidden"
             aria-label="菜单"
           >
-            {open ? <X size={18} /> : <Menu size={18} />}
+            <Menu size={18} className="nav-icon-open" aria-hidden="true" />
+            <X size={18} className="nav-icon-close" aria-hidden="true" />
           </button>
-        </div>
-      </nav>
 
-      {/* Mobile Menu */}
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            initial={{ opacity: 0, y: -8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            className="glass-strong absolute inset-x-4 top-20 rounded-2xl p-4 lg:hidden"
+          {/* 移动端菜单：原生 popover，位于顶部图层，支持 Esc 与轻触外部关闭 */}
+          <div
+            id="site-menu"
+            popover="auto"
+            className="site-menu glass-strong rounded-2xl p-4 lg:hidden"
           >
             <div className="flex flex-col gap-1">
               {NAV_LINKS.map((link) => (
                 <a
                   key={link.href}
                   href={link.href}
-                  onClick={() => setOpen(false)}
+                  onClick={closeMenu}
                   className="rounded-lg px-4 py-3 text-sm font-500 text-[var(--muted-foreground)] transition-colors hover:bg-[var(--muted)] hover:text-[var(--foreground)]"
                 >
                   {link.label}
@@ -124,15 +116,15 @@ export default function Navbar() {
               ))}
               <a
                 href="#quick-start"
-                onClick={() => setOpen(false)}
+                onClick={closeMenu}
                 className="mt-2 inline-flex h-10 w-full items-center justify-center rounded-lg bg-[var(--accent)] text-sm font-600 text-[var(--accent-foreground)] transition-transform hover:scale-[1.02]"
               >
                 开始使用
               </a>
             </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+          </div>
+        </div>
+      </nav>
     </motion.header>
   )
 }

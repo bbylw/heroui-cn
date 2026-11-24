@@ -52,9 +52,18 @@
   }
 
   html {
-    scroll-behavior: smooth;
+    color-scheme: dark;
+    /* 锚点跳转时为固定导航栏留出空间 */
+    scroll-padding-top: 6rem;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* 平滑滚动只对未要求减少动态效果的用户生效 */
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
   }
 
   body {
@@ -68,7 +77,22 @@
     color: var(--accent-foreground);
   }
 
-  /* 自定义滚动条 */
+  /* 自定义滚动条：标准属性在前，WebKit 伪元素仅作回退 */
+  * {
+    scrollbar-color: var(--ink-400, #6f6859) var(--background);
+  }
+
+  html {
+    scrollbar-width: thin;
+  }
+}
+
+@supports not (scrollbar-color: auto) {
+  /* 不支持标准属性的浏览器：恢复宽度并回退到 WebKit 伪元素 */
+  html {
+    scrollbar-width: auto;
+  }
+
   ::-webkit-scrollbar {
     width: 10px;
     height: 10px;
@@ -77,7 +101,7 @@
     background: var(--background);
   }
   ::-webkit-scrollbar-thumb {
-    background: var(--ink-600, #3a362f);
+    background: var(--ink-400, #6f6859);
     border-radius: 5px;
     border: 2px solid var(--background);
   }
@@ -240,25 +264,86 @@
   }
 }
 
-.animate-marquee {
-  animation: marquee 40s linear infinite;
-}
-.animate-float-slow {
-  animation: float-slow 12s ease-in-out infinite;
-}
-.animate-pulse-glow {
-  animation: pulse-glow 6s ease-in-out infinite;
-}
-.animate-scroll-line {
-  animation: scroll-line 2.4s ease-in-out infinite;
+/* 持续性装饰动画：仅在用户未要求减少动态效果时运行，
+   而不是全局把 animation-duration 压到 0.01ms */
+@media (prefers-reduced-motion: no-preference) {
+  .animate-marquee {
+    animation: marquee 40s linear infinite;
+  }
+  .animate-float-slow {
+    animation: float-slow 12s ease-in-out infinite;
+  }
+  .animate-pulse-glow {
+    animation: pulse-glow 6s ease-in-out infinite;
+  }
+  .animate-scroll-line {
+    animation: scroll-line 2.4s ease-in-out infinite;
+  }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
+/* ===== 移动端导航：原生 popover（顶部图层）===== */
+.nav-menu-toggle {
+  anchor-name: --nav-menu-toggle;
+}
+
+.nav-menu-toggle .nav-icon-close {
+  display: none;
+}
+
+/* 展开状态由浏览器维护，用 :has() + :popover-open 切换图标，无需 JS 状态 */
+nav:has(.site-menu:popover-open) .nav-icon-open {
+  display: none;
+}
+nav:has(.site-menu:popover-open) .nav-icon-close {
+  display: block;
+}
+
+.site-menu {
+  position: fixed;
+  inset: auto;
+  /* 不支持锚点定位的浏览器沿用此回退值 */
+  inset-block-start: 4.5rem;
+  inset-block-start: anchor(--nav-menu-toggle bottom);
+  inset-inline: 1rem;
+  margin-block-start: 0.5rem;
+  max-block-size: calc(100dvh - 6rem);
+  overflow: auto;
+  opacity: 0;
+  transition-property: opacity, display, overlay;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-out;
+  /* 需单独声明，放进 transition 简写会让旧浏览器丢弃整条声明 */
+  transition-behavior: allow-discrete;
+}
+
+.site-menu:popover-open {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .site-menu {
+    translate: 0 -0.5rem;
+    transition-property: opacity, translate, display, overlay;
   }
+  .site-menu:popover-open {
+    translate: 0 0;
+  }
+}
+
+/* 进场动画只影响初始状态，减少动态效果时展开不位移 */
+@starting-style {
+  .site-menu:popover-open {
+    opacity: 0;
+    translate: 0 -0.5rem;
+  }
+}
+
+/* ===== 视口外的长区块延后渲染 ===== */
+#features,
+#advanced,
+#quick-start,
+#ai-dev,
+#comparison {
+  content-visibility: auto;
+  contain-intrinsic-size: auto none auto 1200px;
 }
